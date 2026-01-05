@@ -29,7 +29,10 @@ export class backupWorkflow extends WorkflowEntrypoint {
 		);
 
 		await step.do("Check backup status, store on R2, and prune old backups", async () => {
-			const payload = { current_bookmark: bookmark };
+			const payload = {
+				output_format: "polling",
+				current_bookmark: bookmark 
+			};
 
 			const res = await fetch(url, {
 				method,
